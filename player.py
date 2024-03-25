@@ -15,11 +15,11 @@ class Player:
 		self.left = False
 		self.platforms = platforms
 		self.rect = None
-		self.jump_height = 14
-		self.hspeed = 4
-		self.resistance = 0.8
+		self.jump_height = 8
+		self.hspeed = 5
+		self.resistance = 0.7
 		self.falling = 0
-		self.gravity = 1
+		self.gravity = 0.5
 
 	def render(self):
 		self.parent.blit(self.current, (self.x, self.y))
@@ -73,7 +73,7 @@ class Player:
 
 		keys = pygame.key.get_pressed()
 
-		if keys[pygame.K_UP] and self.falling < 3:
+		if keys[pygame.K_UP] and self.falling < 5:
 			self.speed_y = -self.jump_height
 
 		if keys[pygame.K_RIGHT]:
@@ -86,4 +86,4 @@ class Player:
 		self.speed_y += self.gravity
 		self.speed_x = self.speed_x * self.resistance
 
-		self.move_in_steps(abs(self.speed_y) + round(abs(self.speed_x)))
+		self.move_in_steps(round(abs(self.speed_y) + abs(self.speed_x)))

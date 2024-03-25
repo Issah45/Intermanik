@@ -1,7 +1,8 @@
 import pygame
 from pygame.locals import *
+from spike import Spike
 
-width, height = 1000, 600
+width, height = 992, 600
 display = pygame.display.set_mode((width, height))
 
 mouse_init = False
@@ -16,7 +17,11 @@ platformh = 0
 platforms = []
 platform_index = 0
 
-manikom = False
+spikes = []
+spike_index = 0
+s = False
+
+manik = False
 manik_x = 0
 manik_y = 0
 
@@ -47,13 +52,41 @@ while True:
 				platformw = 0
 				platformh = 0
 				platform_index += 1
+			if event.key == pygame.K_n:
+				s = True
+			if event.key == pygame.K_l:
+				try:
+					platforms.remove(platforms[len(platforms)-1])
+				except:
+					print("no.")
+			if event.key == pygame.K_k:
+				try:
+					spikes.remove(spikes[len(spikes)-1])
+				except:
+					print("no.")
+			if event.key == pygame.K_s:
+				level = open("levels/backup.py", "w")
+				level.write("platforms = [\n")
+				for platform in platforms:
+					level.write(f"	pygame.Rect({platform.x}, {platform.y}, {platform.width}, {platform.height}),\n")
+				level.write("]\n")
+				level.write("spikes = [\n")
+				for spike in spikes:
+					level.write(f"	Spike({spike.x}, {spike.y}),\n")
+				level.write("]\n")
+				level.write(f"\nmanik_x = {manik_x}\nmanik_y = {manik_y}\nmanik=True\n")
+			if event.key == pygame.K_a:
+				file = open("levels/backup.py", "r")
+				file_read = file.read()
+				exec(file_read)
 
 	display.fill((255, 255, 255))
 
+	# Mouse Setup
 	mouse = pygame.mouse.get_pressed()[0]
 
-	mousex = pygame.mouse.get_pos()[0]
-	mousey = pygame.mouse.get_pos()[1]
+	mousex = pygame.mouse.get_pos()[0] - (tile_size/2)
+	mousey = pygame.mouse.get_pos()[1] - (tile_size/2)
 
 	mousex = round(mousex / tile_size) * tile_size
 	mousey = round(mousey / tile_size) * tile_size
@@ -67,19 +100,52 @@ while True:
 			platformw = mousex - mousex_init
 			platformh = mousey - mousey_init
 
-	print("level = [")
+	# Platforms
+	print("platforms = [")
 	for platform in platforms:
-		pygame.draw.rect(display, (0, 0, 0), platform)
+		w = round(platform.width / tile_size)
+		h = round(platform.height / tile_size)
+		img = pygame.image.load("images/tile2.png")
+		imger = pygame.transform.scale(img, (tile_size, tile_size))
+		for i in range(w):
+			display.blit(imger, (platform.x+(i*tile_size), platform.y))
+			for j in range(h):
+				display.blit(imger, (platform.x+(i*tile_size), platform.y+(j*tile_size)))
 		print(f"	pygame.Rect({platform.x}, {platform.y}, {platform.width}, {platform.height}),")
 	print("]")
+
+	# Spikes
+	print("\nspikes = [")
+	for spike in spikes:
+		spike.render()
+		print(f"	Spike({spike.x}, {spike.y}),")
+	print("]\n")
+
 	pygame.draw.rect(display, (0, 0, 0), (mousex_init, mousey_init, platformw, platformh))
 
+	# Manikom
 	if not manik:
-		if pygame.key.get_pressed()[K_n]:
+		if pygame.key.get_pressed()[K_b]:
+			manik_x = mousex
+			manik_y = mousey
 			manik = True
 
+	if manik:
+		imgo = pygame.transform.scale(pygame.image.load("images/player/idle.png"), (tile_size, tile_size))
+		display.blit(imgo, (manik_x, manik_y))
+		if pygame.key.get_pressed()[K_v]:
+			manik_x = mousex
+			manik_y = mousey
+		print(f"player.x = {manik_x}")
+		print(f"player.y = {manik_y}")
+
+	if s:
+		spikes.append(Spike(mousex, mousey))
+		s = False
 
 	draw_grid()
+
+	pygame.draw.rect(display, (255, 0, 0), (mousex, mousey, tile_size, tile_size), 2)
 
 	pygame.display.update()
 	clock.tick(60)
