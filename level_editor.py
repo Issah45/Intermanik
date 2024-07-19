@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from spike import Spike
+from eol import EOL
 
 width, height = 992, 600
 display = pygame.display.set_mode((width, height))
@@ -26,6 +27,9 @@ s = False
 manik = False
 manik_x = 0
 manik_y = 0
+
+eol_x = 0
+eol_y = 0
 
 clock = pygame.time.Clock()
 
@@ -125,6 +129,15 @@ while True:
 
 	pygame.draw.rect(display, (0, 0, 0), (mousex_init, mousey_init, platformw, platformh))
 
+	# EOL
+	eol = EOL(eol_x, eol_y)
+	eol.render()
+	if pygame.key.get_pressed()[K_q]:
+		eol_x = mousex
+		eol_y = mousey
+	print(f"eol_x = {eol_x}")
+	print(f"eol_y = {eol_y}")
+
 	# Manikom
 	if not manik:
 		if pygame.key.get_pressed()[K_b]:
@@ -138,8 +151,8 @@ while True:
 		if pygame.key.get_pressed()[K_v]:
 			manik_x = mousex
 			manik_y = mousey
-		print(f"player.x = {manik_x}")
-		print(f"player.y = {manik_y}")
+		print(f"player_x = {manik_x}")
+		print(f"player_y = {manik_y}")
 
 	if s:
 		spikes.append(Spike(mousex, mousey))

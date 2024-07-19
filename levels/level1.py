@@ -55,3 +55,6 @@ spikes = [
 	Spike(384, 512),
 	Spike(64, 544),
 ]
+
+eol_x = 928
+eol_y = 512
