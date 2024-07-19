@@ -14,6 +14,9 @@ clock = pygame.time.Clock()
 tile_size = 32
 level = 1
 
+bgm = pygame.mixer.Sound("sounds/intermanik.wav")
+bgm.play()
+
 pygame.display.set_caption("LManiks")
 
 # Functions

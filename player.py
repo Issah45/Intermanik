@@ -1,5 +1,7 @@
 import pygame
 
+pygame.init()
+
 class Player:
 	def __init__(self, x, y, platforms):
 		self.x = x
