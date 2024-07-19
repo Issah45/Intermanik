@@ -3,7 +3,7 @@ from pygame.locals import *
 from spike import Spike
 from eol import EOL
 
-width, height = 992, 600
+width, height = 1000, 630
 display = pygame.display.set_mode((width, height))
 
 pygame.display.set_caption("LManiks Level Editor")
