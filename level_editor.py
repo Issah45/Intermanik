@@ -5,6 +5,8 @@ from spike import Spike
 width, height = 992, 600
 display = pygame.display.set_mode((width, height))
 
+pygame.display.set_caption("LManiks Level Editor")
+
 mouse_init = False
 tile_size = 32
 

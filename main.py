@@ -10,6 +10,8 @@ display = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 tile_size = 32
 
+pygame.display.set_caption("LManiks")
+
 def approx(a):
 	a = round(a/tile_size) * tile_size
 
