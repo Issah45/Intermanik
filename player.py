@@ -20,13 +20,14 @@ class Player:
 		self.platforms = platforms
 		self.rect = None
 		self.jump_height = 8
+		self.hspeed_normal = 5
 		self.hspeed = 5
 		self.resistance = 0.7
 		self.falling = 0
 		self.gravity = 0.5
 
 	def rect_update(self):
-		self.rect = pygame.Rect(self.x+5, self.y, self.current.get_width()-10, self.current.get_height())
+		self.rect = pygame.Rect(self.x, self.y, self.current.get_width(), self.current.get_height())
 
 	def move_in_steps(self, steps):
 		self.falling += 1
@@ -74,11 +75,14 @@ class Player:
 			self.left = True
 		
 		if keys[pygame.K_x]:
-			self.hspeed = 15
+			if self.hspeed < 20:
+				self.hspeed += 1
+			else:
+				self.hspeed = 19
 			self.dashing = True
 			self.current = self.dash
 		else:
-			self.hspeed = 5
+			self.hspeed = self.hspeed_normal
 			self.dashing = False
 
 		self.speed_y += self.gravity

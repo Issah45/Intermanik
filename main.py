@@ -27,7 +27,6 @@ def approx(a):
 player_x, player_y = 0, 0
 platforms, spikes = [], []
 exec(open(f"levels/level{level}.py").read())
-
 eol = EOL(eol_x, eol_y)
 player = Player(player_x, player_y, platforms)
 
