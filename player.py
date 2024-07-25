@@ -13,6 +13,8 @@ class Player:
 		self.idle = pygame.transform.scale(pygame.image.load("images/player/idle.png"), self.size)
 		self.jump = pygame.transform.scale(pygame.image.load("images/player/jump.png"), self.size)
 		self.fall = pygame.transform.scale(pygame.image.load("images/player/fall.png"), self.size)
+		self.dash = pygame.transform.scale(pygame.image.load("images/player/dash.png"), self.size)
+		self.dashing = False
 		self.current = self.idle
 		self.left = False
 		self.platforms = platforms
@@ -22,20 +24,6 @@ class Player:
 		self.resistance = 0.7
 		self.falling = 0
 		self.gravity = 0.5
-
-	def render(self):
-		self.parent.blit(self.current, (self.x, self.y))
-
-		if self.falling < 3:
-			self.current = self.idle
-		else:
-			if self.speed_y > 0:
-				self.current = self.fall
-			else:
-				self.current = self.jump
-
-		if self.left:
-			self.current = pygame.transform.flip(self.current, 1, 0)
 
 	def rect_update(self):
 		self.rect = pygame.Rect(self.x+5, self.y, self.current.get_width()-10, self.current.get_height())
@@ -75,7 +63,7 @@ class Player:
 
 		keys = pygame.key.get_pressed()
 
-		if keys[pygame.K_UP] and self.falling < 5:
+		if keys[pygame.K_z] and self.falling < 5:
 			self.speed_y = -self.jump_height
 
 		if keys[pygame.K_RIGHT]:
@@ -84,8 +72,30 @@ class Player:
 		if keys[pygame.K_LEFT]:
 			self.speed_x = -self.hspeed
 			self.left = True
+		
+		if keys[pygame.K_x]:
+			self.hspeed = 15
+			self.dashing = True
+			self.current = self.dash
+		else:
+			self.hspeed = 5
+			self.dashing = False
 
 		self.speed_y += self.gravity
 		self.speed_x = self.speed_x * self.resistance
 
 		self.move_in_steps(round(abs(self.speed_y) + abs(self.speed_x)))
+	
+	def render(self):
+		if self.left:
+			self.current = pygame.transform.flip(self.current, 1, 0)
+		
+		self.parent.blit(self.current, (self.x, self.y))
+
+		if self.falling < 3:
+			self.current = self.idle
+		else:
+			if self.speed_y > 0:
+				self.current = self.fall
+			else:
+				self.current = self.jump

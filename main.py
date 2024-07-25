@@ -49,12 +49,12 @@ while True:
 			for j in range(h):
 				display.blit(imger, (platform.x+(i*tile_size), platform.y+(j*tile_size)))
 
+	# Updates
+	player.update()
+
 	# Renders
 	player.render()
 	eol.render()
-
-	# Updates
-	player.update()
 
 	# Collisions
 	for spike in spikes:
