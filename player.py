@@ -75,10 +75,10 @@ class Player:
 			self.left = True
 		
 		if keys[pygame.K_x]:
-			if self.hspeed < 20:
+			if self.hspeed < 30:
 				self.hspeed += 1
 			else:
-				self.hspeed = 19
+				self.hspeed = 29
 			self.dashing = True
 			self.current = self.dash
 		else:
@@ -87,6 +87,11 @@ class Player:
 
 		self.speed_y += self.gravity
 		self.speed_x = self.speed_x * self.resistance
+
+		if self.x < 0:
+			self.x = 0
+		if self.x > 960:
+			self.x = 960
 
 		self.move_in_steps(round(abs(self.speed_y) + abs(self.speed_x)))
 	

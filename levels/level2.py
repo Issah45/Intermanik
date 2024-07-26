@@ -15,12 +15,7 @@ platforms = [
 ]
 
 spikes = [
-        Spike(716, 488),
-        Spike(556, 424),
-        Spike(460, 360),
-        Spike(364, 296),
-        Spike(268, 168),
-        Spike(204, 104),
+        Spike(716, 488)
 ]
 
 eol_x = 64
