@@ -16,14 +16,16 @@ width, height = 992, 600
 display = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 tile_size = 32
-level = 3
+level = 1
 bossmode = 0
+_bossmode = False
 
 # Tanker Init
-tanker = Tanker(592, 335)
+tanker = Tanker(592, 378)
 tanker_bullets = []
 tanker_delay = 20
 tanker_thugs = []
+tankershot = False
 
 # Setup 2
 bgm = pygame.mixer.Sound("sounds/intermanik.wav")
@@ -81,14 +83,20 @@ while True:
 		player = Player(player_x, player_y, platforms)
 	
 	# Boss Mode
-	if level == 3:
+	if level == 3 and tanker.hp > 0:
 		bossmode = 1
 	if bossmode == 1:
-		if tanker_delay < 1:
-			# tanker_bullets.append(TankerBullet(tanker.x+200, tanker.y+100, rand(0, 180)))
-			if rand(0, 1) == 1:
-				tanker_thugs.append(TankerThug(tanker.x+200, tanker.y+100, rand(0, 180)))
-			tanker_delay = 3
+		if tanker.hp < 1:
+			bossmode = 0
+			eol.x = 832
+			eol.y = 512
+			eol.rect_update()
+		
+		if tanker_delay < 1 and tanker.f < -100:
+			tanker_bullets.append(TankerBullet(tanker.x+200, tanker.y+100, rand(0, 180)))
+			tanker_thugs.append(TankerThug(tanker.x+200, tanker.y+100, rand(0, 180)))
+			tanker_delay = 5
+		
 		for tanker_bullet in tanker_bullets:
 			tanker_bullet.render()
 			tanker_bullet.update()
@@ -100,20 +108,21 @@ while True:
 			tanker_thug.update()
 			
 			if player.rect.colliderect(tanker_thug.rect) and player.dashing and not tanker_thug.o:
+				player.speed_y = -player.jump_height
 				tanker_thug.dir = -tanker_thug.dir
 				tanker_thug.o = True
-			if player.rect.colliderect(tanker_thug.rect) and not player.dashing and not tanker_thug.o:
-				pygame.quit()
+			
 			if tanker.rect.colliderect(tanker_thug.rect) and tanker_thug.o:
-				tanker.e = -20
-				tanker.hp -= 4
+				tanker.e = -5
+				tanker.hp -= 8
 				tanker_thugs.remove(tanker_thug)
 		tanker.render()
+		tanker.update()
 		tanker_delay -= 1
 
 		tankw = tanker.img.get_width() - 5
-		pygame.draw.rect(display, (255, 0, 0), (tanker.x, tanker.y, tankw, 20))
-		pygame.draw.rect(display, (0, 255, 100), (tanker.x, tanker.y, tankw * (tanker.hp / tanker.full_hp), 20))
-
+		pygame.draw.rect(display, (255, 0, 0), (tanker.x, tanker.y-20, tankw, 20))
+		pygame.draw.rect(display, (0, 255, 100), (tanker.x, tanker.y-20, tankw * (tanker.hp / tanker.full_hp), 20))
+	
 	pygame.display.update()
 	clock.tick(60)

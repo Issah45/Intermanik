@@ -75,10 +75,10 @@ class Player:
 			self.left = True
 		
 		if keys[pygame.K_x]:
-			if self.hspeed < 30:
+			if self.hspeed < 20:
 				self.hspeed += 1
 			else:
-				self.hspeed = 29
+				self.hspeed = 19
 			self.dashing = True
 			self.current = self.dash
 		else:
