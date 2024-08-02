@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from spike import Spike
 from eol import EOL
+from dialog import Dialog
 
 width, height = 1000, 630
 display = pygame.display.set_mode((width, height))
@@ -19,6 +20,8 @@ platformh = 0
 
 platforms = []
 platform_index = 0
+
+dialogs = []
 
 spikes = []
 spike_index = 0
@@ -85,6 +88,8 @@ while True:
 				file = open("levels/backup.py", "r")
 				file_read = file.read()
 				exec(file_read)
+			if event.key == pygame.K_d:
+				dialogs.append(Dialog(mousex, mousey, []))
 
 	display.fill((255, 255, 255))
 
@@ -125,6 +130,12 @@ while True:
 	for spike in spikes:
 		spike.render()
 		print(f"	Spike({spike.x}, {spike.y}),")
+	print("]\n")
+
+	print ("\ndialogs = [")
+	for dialog in dialogs:
+		dialog.render()
+		print(f" Dialog({dialog.x}, {dialog.y}, [])")
 	print("]\n")
 
 	pygame.draw.rect(display, (0, 0, 0), (mousex_init, mousey_init, platformw, platformh))

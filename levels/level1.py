@@ -1,6 +1,16 @@
 
+
 player_x = 896
 player_y = 64
+
+dialogs = [
+	Dialog(850, 60, [["Manikom", "Hello!"],
+					["Romania", "shurup"],
+					["Manikom", "GUrrrrR"],
+					["Manikom", "im going to deft someone"],
+					["Manikom", "i wonder who he is"],
+					["Romania", "alealoalæ. ale"],])
+]
 
 platforms = [
 	pygame.Rect(0, 0, 32, 608),

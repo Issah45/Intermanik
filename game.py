@@ -7,6 +7,7 @@ from player import Player
 from dialog import Dialog
 from spike import Spike
 from eol import EOL
+from dialog import Dialog
 from bosses.tanker import Tanker
 from bosses.tanker_bullet import TankerBullet
 from bosses.tanker_thug import TankerThug
@@ -19,6 +20,7 @@ tile_size = 32
 level = 1
 bossmode = 0
 _bossmode = False
+holdinger = False
 
 # Tanker Init
 tanker = Tanker(592, 378)
@@ -39,7 +41,7 @@ def approx(a):
 
 # Variables & O
 player_x, player_y = 0, 0
-platforms, spikes = [], []
+platforms, spikes, dialogs = [], [], []
 exec(open(f"levels/level{level}.py").read())
 eol = EOL(eol_x, eol_y)
 player = Player(player_x, player_y, platforms)
@@ -69,7 +71,7 @@ while True:
 	player.render()
 	eol.render()
 
-	# Collisions
+	# Collisions & Stuff
 	for spike in spikes:
 		spike.render()
 		# print(spike.rect)
@@ -82,7 +84,37 @@ while True:
 		eol = EOL(eol_x, eol_y)
 		player = Player(player_x, player_y, platforms)
 	
-	# Boss Mode
+	# Dialog
+	for dialog in dialogs:
+		dialog.render()
+		dialog.update()
+		try: dialog.rect.colliderect(player.rect)
+		except: pass
+		else:
+			if dialog.rect.colliderect(player.rect):
+				dialog.tooltip = True
+			else:
+				dialog.tooltip = False
+			
+			if dialog.rect.colliderect(player.rect) and pygame.key.get_pressed()[K_x]:
+				dialog.dia = True
+			
+			if dialog.dia and pygame.key.get_pressed()[K_DOWN] and not holdinger:
+				dialog.index += 1
+			if dialog.dia and pygame.key.get_pressed()[K_UP] and not holdinger:
+				dialog.index -= 1
+			if dialog.index >= len(dialog.content):
+				dialog.dia = False
+				dialog.index = 0
+			if dialog.index < 0:
+				dialog.index = 0
+			
+			if pygame.key.get_pressed()[K_UP] or pygame.key.get_pressed()[K_DOWN]:
+				holdinger = True
+			else:
+				holdinger = False
+
+	# Tanker
 	if level == 3 and tanker.hp > 0:
 		bossmode = 1
 	if bossmode == 1:
