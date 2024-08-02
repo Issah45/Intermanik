@@ -74,7 +74,7 @@ while True:
 	# Collisions & Stuff
 	for spike in spikes:
 		spike.render()
-		# print(spike.rect)
+		print(spike.rect)
 		if spike.rect.colliderect(player.rect):
 			pygame.quit()
 	
@@ -140,7 +140,6 @@ while True:
 			tanker_thug.update()
 			
 			if player.rect.colliderect(tanker_thug.rect) and player.dashing and not tanker_thug.o:
-				player.speed_y = -player.jump_height
 				tanker_thug.dir = -tanker_thug.dir
 				tanker_thug.o = True
 			

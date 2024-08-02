@@ -8,12 +8,10 @@ class Player:
 		self.y = y
 		self.speed_y = 0
 		self.speed_x = 0
-		self.size = (32, 28)
 		self.parent = pygame.display.get_surface()
-		self.idle = pygame.transform.scale(pygame.image.load("images/player/idle.png"), self.size)
-		self.jump = pygame.transform.scale(pygame.image.load("images/player/jump.png"), self.size)
-		self.fall = pygame.transform.scale(pygame.image.load("images/player/fall.png"), self.size)
-		self.dash = pygame.transform.scale(pygame.image.load("images/player/dash.png"), self.size)
+		self.idle = pygame.image.load("images/player/idle.png")
+		self.jump = pygame.image.load("images/player/jump.png")
+		self.fall = pygame.image.load("images/player/fall.png")
 		self.dashing = False
 		self.current = self.idle
 		self.left = False
@@ -22,9 +20,9 @@ class Player:
 		self.jump_height = 8
 		self.hspeed_normal = 5
 		self.hspeed = 5
-		self.resistance = 0.7
+		self.resistance = 0.75
 		self.falling = 0
-		self.gravity = 0.5
+		self.gravity = 0.45
 
 	def rect_update(self):
 		self.rect = pygame.Rect(self.x, self.y, self.current.get_width(), self.current.get_height())
@@ -75,12 +73,8 @@ class Player:
 			self.left = True
 		
 		if keys[pygame.K_x]:
-			if self.hspeed < 20:
-				self.hspeed += 1
-			else:
-				self.hspeed = 19
+			self.hspeed = 15
 			self.dashing = True
-			self.current = self.dash
 		else:
 			self.hspeed = self.hspeed_normal
 			self.dashing = False
