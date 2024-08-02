@@ -1,70 +1,51 @@
-
-
-player_x = 896
-player_y = 64
-
-dialogs = [
-	Dialog(850, 60, [["Manikom", "Hello!"],
-					["Romania", "shurup"],
-					["Manikom", "GUrrrrR"],
-					["Manikom", "im going to deft someone"],
-					["Manikom", "i wonder who he is"],
-					["Romania", "alealoalæ. ale"],])
-]
-
 platforms = [
-	pygame.Rect(0, 0, 32, 608),
-	pygame.Rect(0, 0, 992, 32),
-	pygame.Rect(960, 0, 32, 576),
-	pygame.Rect(0, 576, 992, 32),
-	pygame.Rect(192, 160, 768, 32),
-	pygame.Rect(32, 288, 576, 32),
-	pygame.Rect(256, 224, 32, 64),
-	pygame.Rect(320, 192, 32, 64),
-	pygame.Rect(384, 224, 32, 64),
-	pygame.Rect(448, 192, 32, 64),
-	pygame.Rect(512, 224, 32, 64),
-	pygame.Rect(576, 192, 32, 64),
-	pygame.Rect(608, 288, 320, 32),
-	pygame.Rect(896, 320, 32, 128),
-	pygame.Rect(672, 256, 256, 32),
-	pygame.Rect(736, 224, 192, 32),
-	pygame.Rect(640, 544, 224, 32),
-	pygame.Rect(640, 512, 192, 32),
-	pygame.Rect(640, 480, 160, 32),
-	pygame.Rect(640, 448, 128, 32),
-	pygame.Rect(640, 416, 64, 32),
-	pygame.Rect(640, 384, 32, 32),
-	pygame.Rect(608, 416, 32, 160),
-	pygame.Rect(576, 448, 32, 128),
-	pygame.Rect(544, 480, 32, 96),
-	pygame.Rect(512, 512, 32, 64),
-	pygame.Rect(480, 544, 32, 32),
-	pygame.Rect(384, 544, 32, 32),
-	pygame.Rect(320, 320, 32, 224),
-	pygame.Rect(256, 544, 32, 32),
-	pygame.Rect(192, 320, 32, 224),
-	pygame.Rect(128, 544, 32, 32),
-	pygame.Rect(32, 320, 96, 64),
-	pygame.Rect(192, 32, 640, 32),
-	pygame.Rect(192, 64, 352, 32),
-	pygame.Rect(192, 96, 64, 32),
+        pygame.Rect(0, 0, 960, 32),
+        pygame.Rect(928, 0, 32, 608),
+        pygame.Rect(0, 576, 928, 32),
+        pygame.Rect(0, 0, 32, 576),
+        pygame.Rect(160, 160, 768, 32),
+        pygame.Rect(32, 320, 672, 32),
+        pygame.Rect(192, 256, 32, 64),
+        pygame.Rect(256, 160, 32, 128),
+        pygame.Rect(320, 256, 32, 64),
+        pygame.Rect(416, 160, 32, 128),
+        pygame.Rect(480, 256, 32, 64),
+        pygame.Rect(544, 160, 32, 128),
+        pygame.Rect(128, 544, 672, 32),
+        pygame.Rect(128, 512, 512, 32),
+        pygame.Rect(128, 448, 384, 64),
+        pygame.Rect(96, 480, 32, 96),
+        pygame.Rect(160, 416, 256, 32),
 ]
 
 spikes = [
-	Spike(928, 128),
-	Spike(768, 128),
-	Spike(576, 128),
-	Spike(128, 256),
-	Spike(96, 256),
-	Spike(864, 544),
-	Spike(800, 480),
-	Spike(704, 416),
-	Spike(576, 416),
-	Spike(512, 480),
-	Spike(384, 512),
-	Spike(64, 544),
+        Spike(748, 136, False),
+        Spike(588, 136, False),
+        Spike(396, 136, False),
+        Spike(236, 136, False),
+        Spike(44, 296, False),
+        Spike(76, 296, False),
+        Spike(652, 520, False),
+        Spike(524, 488, False),
+        Spike(428, 424, False),
+        Spike(108, 456, False),
+        Spike(748, 520, False),
+        Spike(908, 552, False),
 ]
 
-eol_x = 928
+
+dialogs = [
+        Dialog(640, 288, [["ogre", "3: The Fight"],
+							["Israel_Angry", "You stole my land!"],
+							["Palestine_Angry", "You stole my land!"],
+							["Manikom_Confused", "Why are you fighting?"],
+							["Romania_Bored", "Eh, they've been doing that for who knows how long"],
+							["Manikom_Bored", "Isn't it worth it to work together for once?"],
+							["Manikom_Confused", "I mean, you probably want to get out of here."],
+							["Israel_Angry", "I guess so..."]]),
+]
+
+eol_x = 32
 eol_y = 512
+player_x = 896
+player_y = 128

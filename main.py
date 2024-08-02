@@ -1,4 +1,4 @@
-import pygame, os
+import pygame, os, math
 from pygame.locals import *
 
 width, height = 992, 600
@@ -12,6 +12,12 @@ playbutton_y = round(height / 1.25) - (playbutton_img.get_height() / 2)
 playbutton_rect = pygame.Rect(playbutton_x, playbutton_y,
                   playbutton_img.get_width(), playbutton_img.get_height())
 
+# Title
+title_img = pygame.image.load("images/title.png")
+title_x = round(width / 2) - (title_img.get_width() / 2)
+title_y = round(height / 3.5) - (title_img.get_height() / 2)
+o = 0
+
 # Mouse
 mouse_rect = pygame.Rect(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], 20, 20)
 
@@ -20,10 +26,15 @@ while True:
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
-    display.fill((30, 50, 80))
+    display.fill((10, 20, 30))
 
     display.blit(playbutton_img, (playbutton_x, playbutton_y))
-    pygame.draw.rect(display, (0, 0, 0), mouse_rect)
+    display.blit(title_img, (title_x, title_y))
+
+    title_y += math.sin(o)
+    o += 0.1
+
+    playbutton_y += math.cos(o)
 
     mouse_rect = pygame.Rect(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], 20, 20)
 

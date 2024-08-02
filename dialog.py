@@ -34,19 +34,24 @@ class Dialog:
 			font = pygame.font.Font("pixelsans.ttf", 30)
 			text_surf = font.render(self.content[self.index][1], True, (255, 255, 255))
 
-			if self.content[self.index][0] == "Manikom":
-				self.imageio = pygame.image.load("images/player/idle.png")
-				self.imageio = pygame.transform.scale(self.imageio, (100, 80))
-			if self.content[self.index][0] == "Romania":
-				self.imageio = pygame.image.load("images/dialogs/romania.png")
-				self.imageio = pygame.transform.scale(self.imageio, (100, 80))
-				self.imageio = pygame.transform.flip(self.imageio, True, False)
+			contentio = self.content[self.index][0].lower()
+			self.imageio = pygame.image.load(f"images/dialogs/{contentio}.png")
+			self.imageio = pygame.transform.scale(self.imageio, (100, 80))
+
+			# if self.content[self.index][0] == "Manikom":
+			# 	self.imageio = pygame.image.load("images/player/idle.png")
+			# 	self.imageio = pygame.transform.scale(self.imageio, (100, 80))
+			# if self.content[self.index][0] == "Romania":
+			# 	self.imageio = pygame.image.load("images/dialogs/romania.png")
+			# 	self.imageio = pygame.transform.scale(self.imageio, (100, 80))
+			# 	self.imageio = pygame.transform.flip(self.imageio, True, False)
 			
 			self.parent.blit(text_surf, (x, y))
 
-			if self.content[self.index][0] == "Manikom":
+			if contentio == "manikom" or contentio == "manikom_bored" or contentio == "manikom_confused":
 				self.parent.blit(self.imageio, (x+40, y-70))
 			else:
+				self.imageio = pygame.transform.flip(self.imageio, True, False)
 				self.parent.blit(self.imageio, (w-x-40, y-70))
 
 			if k[pygame.K_ESCAPE]:

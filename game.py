@@ -11,9 +11,9 @@ from dialog import Dialog
 from bosses.tanker import Tanker
 from bosses.tanker_bullet import TankerBullet
 from bosses.tanker_thug import TankerThug
-
+pygame.init()
 # Setup
-width, height = 992, 600
+width, height = 960, 600
 display = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 tile_size = 32
@@ -32,6 +32,8 @@ tankershot = False
 # Setup 2
 bgm = pygame.mixer.Sound("sounds/intermanik.wav")
 bgm.play()
+
+bg = pygame.transform.scale(pygame.image.load("images/sky.jpg"), (width, height)).convert()
 
 pygame.display.set_caption("LManiks")
 
@@ -52,12 +54,13 @@ while True:
 		if event.type == QUIT:
 			pygame.quit()
 	display.fill((50, 150, 250))
+	display.blit(bg, (0, 0))
 
 	# Platforms
 	for platform in platforms:
 		w = round(platform.width / tile_size)
 		h = round(platform.height / tile_size)
-		img = pygame.image.load("images/tile4.png")
+		img = pygame.image.load("images/tile4.png").convert()
 		imger = pygame.transform.scale(img, (tile_size, tile_size))
 		for i in range(w):
 			display.blit(imger, (platform.x+(i*tile_size), platform.y))
@@ -74,7 +77,6 @@ while True:
 	# Collisions & Stuff
 	for spike in spikes:
 		spike.render()
-		print(spike.rect)
 		if spike.rect.colliderect(player.rect):
 			pygame.quit()
 	
@@ -142,6 +144,7 @@ while True:
 			if player.rect.colliderect(tanker_thug.rect) and player.dashing and not tanker_thug.o:
 				tanker_thug.dir = -tanker_thug.dir
 				tanker_thug.o = True
+				player.speed_x = -10
 			
 			if tanker.rect.colliderect(tanker_thug.rect) and tanker_thug.o:
 				tanker.e = -5

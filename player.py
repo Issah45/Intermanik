@@ -9,9 +9,9 @@ class Player:
 		self.speed_y = 0
 		self.speed_x = 0
 		self.parent = pygame.display.get_surface()
-		self.idle = pygame.image.load("images/player/idle.png")
-		self.jump = pygame.image.load("images/player/jump.png")
-		self.fall = pygame.image.load("images/player/fall.png")
+		self.idle = pygame.image.load("images/player/idle.png").convert_alpha()
+		self.jump = pygame.image.load("images/player/jump.png").convert_alpha()
+		self.fall = pygame.image.load("images/player/fall.png").convert_alpha()
 		self.dashing = False
 		self.current = self.idle
 		self.left = False

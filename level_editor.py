@@ -81,7 +81,7 @@ while True:
 				level.write("]\n")
 				level.write("spikes = [\n")
 				for spike in spikes:
-					level.write(f"	Spike({spike.x}, {spike.y}),\n")
+					level.write(f"	Spike({spike.x}, {spike.y}, False),\n")
 				level.write("]\n")
 				level.write(f"\nmanik_x = {manik_x}\nmanik_y = {manik_y}\nmanik=True\n")
 			if event.key == pygame.K_a:
@@ -129,13 +129,13 @@ while True:
 	print("\nspikes = [")
 	for spike in spikes:
 		spike.render()
-		print(f"	Spike({spike.x}, {spike.y}),")
+		print(f"	Spike({spike.x}, {spike.y}, False),")
 	print("]\n")
 
 	print ("\ndialogs = [")
 	for dialog in dialogs:
 		dialog.render()
-		print(f" Dialog({dialog.x}, {dialog.y}, [])")
+		print(f"	Dialog({dialog.x}, {dialog.y}, []),")
 	print("]\n")
 
 	pygame.draw.rect(display, (0, 0, 0), (mousex_init, mousey_init, platformw, platformh))
@@ -166,7 +166,7 @@ while True:
 		print(f"player_y = {manik_y}")
 
 	if s:
-		spikes.append(Spike(mousex, mousey))
+		spikes.append(Spike(mousex, mousey, True))
 		s = False
 
 	draw_grid()

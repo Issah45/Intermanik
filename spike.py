@@ -1,13 +1,14 @@
 import pygame
 
 class Spike:
-	def __init__(self, x, y, tile_size=32):
+	def __init__(self, x, y, tvoyo, tile_size=32):
 		self.x = x
 		self.y = y
 		self.parent = pygame.display.get_surface()
 		self.img = pygame.image.load("images/spike3.png")
-		self.x = self.x + (tile_size - self.img.get_width())
-		self.y = self.y + (tile_size - self.img.get_height())
+		if tvoyo:
+			self.x = self.x + (tile_size - self.img.get_width())
+			self.y = self.y + (tile_size - self.img.get_height())
 		tvoyox = 8
 		tvoyoy = 10
 		self.rect = pygame.Rect(self.x+tvoyox, self.y+tvoyoy, self.img.get_width()-(tvoyox * 2), self.img.get_height()-(tvoyoy * 2))
