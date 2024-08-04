@@ -31,8 +31,12 @@ spikes = [
 
 
 dialogs = [
-        Dialog(384, 416, []),
-        Dialog(704, 320, []),
+
+        Dialog(704-64, 320+32, [["ogre", "2: A Message"],
+                          ["romania", "I found something!"],
+                          ["manikom_confused", "what is it?"],
+                          ["romania_bored", "Its a letter sent by 'Rigorous'"],
+                          ["manikom_small", "Well, that's not helpful (whoever Rigorous is)"]]),
 ]
 
 eol_x = 32

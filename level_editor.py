@@ -3,6 +3,7 @@ from pygame.locals import *
 from spike import Spike
 from eol import EOL
 from dialog import Dialog
+from lavaball import LavaBall
 
 width, height = 1000, 630
 display = pygame.display.set_mode((width, height))
@@ -26,6 +27,8 @@ dialogs = []
 spikes = []
 spike_index = 0
 s = False
+
+lavaballs = []
 
 manik = False
 manik_x = 0
@@ -63,7 +66,7 @@ while True:
 				platform_index += 1
 			if event.key == pygame.K_n:
 				s = True
-			if event.key == pygame.K_l:
+			if event.key == pygame.K_r:
 				try:
 					platforms.remove(platforms[len(platforms)-1])
 				except:
@@ -90,6 +93,8 @@ while True:
 				exec(file_read)
 			if event.key == pygame.K_d:
 				dialogs.append(Dialog(mousex, mousey, []))
+			if event.key == pygame.K_l:
+				lavaballs.append(LavaBall(mousex, mousey))
 
 	display.fill((255, 255, 255))
 
@@ -116,7 +121,7 @@ while True:
 	for platform in platforms:
 		w = round(platform.width / tile_size)
 		h = round(platform.height / tile_size)
-		img = pygame.image.load("images/tile2.png")
+		img = pygame.image.load("images/tile4.png")
 		imger = pygame.transform.scale(img, (tile_size, tile_size))
 		for i in range(w):
 			display.blit(imger, (platform.x+(i*tile_size), platform.y))
@@ -148,6 +153,15 @@ while True:
 		eol_y = mousey
 	print(f"eol_x = {eol_x}")
 	print(f"eol_y = {eol_y}")
+
+	# LB
+	print("lavaballs = [")
+	for lavaball in lavaballs:
+		print(f"	LavaBall({lavaball.orgX}, {lavaball.orgY}),")
+		lavaball.render()
+		lavaball.update()
+	print("]")
+
 
 	# Manikom
 	if not manik:

@@ -7,9 +7,10 @@ m: confirm tile\
 n: place spike\
 b: place Manikom\
 v: reposition Manikom\
-l: remove last tile\
+r: remove last tile\
 k: remove last spike\
 q: place EOL\
 s: save\
 a: load\
 d: add dialog\
+l: add lava ball\

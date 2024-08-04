@@ -6,12 +6,12 @@ class Tanker:
 		self.x = x + self.numero
 		self.y = y
 		self.parent = pygame.display.get_surface()
-		self.img = pygame.image.load("images/bosses/tanker.png")
-		self.imgo = pygame.image.load("images/bosses/tanker_fill.png")
-		self.imgn = pygame.image.load("images/bosses/tanker.png")
+		self.img = pygame.image.load("images/bosses/tanker.png").convert_alpha()
+		self.imgo = pygame.image.load("images/bosses/tanker_fill.png").convert_alpha()
+		self.imgn = pygame.image.load("images/bosses/tanker.png").convert_alpha()
 		self.rect = pygame.Rect(self.x, self.y, self.img.get_width(), self.img.get_height())
-		self.hp = 50
-		self.full_hp = 50
+		self.hp = 120
+		self.full_hp = 120
 		self.e = 4
 		self.f = self.numero
 		self.acc = 5

@@ -33,16 +33,18 @@ spikes = [
         Spike(908, 552, False),
 ]
 
+lavaballs = [
+]
 
 dialogs = [
         Dialog(640, 288, [["ogre", "3: The Fight"],
-							["Israel_Angry", "You stole my land!"],
-							["Palestine_Angry", "You stole my land!"],
-							["Manikom_Confused", "Why are you fighting?"],
-							["Romania_Bored", "Eh, they've been doing that for who knows how long"],
-							["Manikom_Bored", "Isn't it worth it to work together for once?"],
-							["Manikom_Confused", "I mean, you probably want to get out of here."],
-							["Israel_Angry", "I guess so..."]]),
+                        ["Israel_Angry", "You stole my land!"],
+                        ["Palestine_Angry", "You stole my land!"],
+                        ["Manikom_Confused", "Why are you fighting?"],
+                        ["Romania_Bored", "Eh, they've been doing that for who knows how long"],
+                        ["Manikom_Bored", "Isn't it worth it to work together for once?"],
+                        ["Manikom_Confused", "I mean, you probably want to get out of here."],
+                        ["Israel_Angry", "I guess so..."]]),
 ]
 
 eol_x = 32

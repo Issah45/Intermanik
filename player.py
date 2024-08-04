@@ -84,8 +84,8 @@ class Player:
 
 		if self.x < 0:
 			self.x = 0
-		if self.x > 960:
-			self.x = 960
+		if self.x > 928:
+			self.x = 928
 
 		self.move_in_steps(round(abs(self.speed_y) + abs(self.speed_x)))
 	
