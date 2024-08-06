@@ -6,6 +6,8 @@ class Dialog:
 	def __init__(self, x, y, content, imger="images/dialog.png", imgerflip=False):
 		self.x = x
 		self.y = y
+		if imger != "images/dialog.png":
+			self.y += 5
 		self.parent = pygame.display.get_surface()
 		self.img = pygame.image.load(imger)
 		if imgerflip:

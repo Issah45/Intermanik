@@ -13,6 +13,7 @@ from bosses.tanker import Tanker
 from bosses.tanker_bullet import TankerBullet
 from bosses.tanker_thug import TankerThug
 pygame.init()
+
 # Setup
 width, height = 960, 600
 display = pygame.display.set_mode((width, height))
@@ -24,6 +25,8 @@ _bossmode = False
 holdinger = False
 screen_shake = 0
 max_screen_shake = 100
+blocks = 0
+block_lim = 3
 
 # Tanker Init
 tanker = Tanker(592, 378)
@@ -39,6 +42,7 @@ trans.set_alpha(transition)
 trans.fill((255,255,255))
 
 bg = pygame.transform.scale(pygame.image.load("images/sky.jpg"), (width, height)).convert()
+bg2 = pygame.transform.scale(pygame.image.load("images/cave.jpg"), (width, height)).convert()
 
 pygame.display.set_caption("LManiks")
 
@@ -47,11 +51,14 @@ def approx(a):
 	a = round(a/tile_size) * tile_size
 
 def restart():
-	exec(open(f"levels/level{level}.py").read())
+	# platforms = []
 	eol = EOL(eol_x, eol_y)
 	player.x = player_x
 	player.y = player_y
 	player.rect_update()
+
+def round32(what):
+	return round(what/32) * 32
 
 # Variables & O
 player_x, player_y = 0, 0
@@ -60,14 +67,40 @@ exec(open(f"levels/level{level}.py").read())
 eol = EOL(eol_x, eol_y)
 player = Player(player_x, player_y, platforms)
 
+qua = pygame.Surface((50, 50))
+
 # Game Loop
 while True:
 	for event in pygame.event.get():
 		if event.type == QUIT:
 			pygame.quit()
-	display.fill((50, 150, 250))
-	display.blit(bg, (0, 0))
+		if event.type == KEYDOWN:
+			if event.key == K_c and blocks < block_lim:
+				if player.left: x = round32(player.x) - 32
+				else: x = round32(player.x) + 32
+				y = round32(player.y)
 
+				r = pygame.Rect(x, y, 32, 32)
+
+				if player.rect.colliderect(r):
+					if player.left: x -= 32
+					else: x += 32
+					r = pygame.Rect(x, y, 32, 32)
+				blocks += 1
+
+				platforms.append(r)
+			if event.key == K_r:
+				exec(open(f"levels/level{level}.py").read())
+				restart()
+				player.platforms = platforms
+				screen_shake = 100
+				blocks = 0
+	display.fill((50, 150, 250))
+	# Background
+	if level <= 9:
+		display.blit(bg, (0, 0))
+	if level == 9:
+		display.blit(bg2, (round(width*2/3), 0))
 	# Platforms
 	for platform in platforms:
 		w = round(platform.width / tile_size)
@@ -88,15 +121,21 @@ while True:
 
 	# Bounds
 	if player.y > 650:
+		exec(open(f"levels/level{level}.py").read())
 		restart()
+		player.platforms = platforms
 		screen_shake = 100
+		blocks = 0
 
 	# Collisions & Stuff
 	for spike in spikes:
 		spike.render()
 		if spike.rect.colliderect(player.rect):
+			exec(open(f"levels/level{level}.py").read())
 			restart()
+			player.platforms = platforms
 			screen_shake = 100
+			blocks = 0
 	
 	if player.rect.colliderect(eol.rect):
 		level += 1
@@ -104,14 +143,18 @@ while True:
 		eol = EOL(eol_x, eol_y)
 		player = Player(player_x, player_y, platforms)
 		transition = 255
+		blocks = 0
 		open("levelsave", "w").write(str(level))
 	
 	for lavaball in lavaballs:
 		lavaball.render()
 		lavaball.update()
 		if player.rect and player.rect.colliderect(lavaball.rect):
+			exec(open(f"levels/level{level}.py").read())
 			restart()
+			player.platforms = platforms
 			screen_shake = 100
+			blocks = 0
 
 	# Dialog
 	for dialog in dialogs:
@@ -144,7 +187,7 @@ while True:
 				holdinger = False
 
 	# Tanker
-	if level == 5 and tanker.hp > 0:
+	if level == 8 and tanker.hp > 0:
 		bossmode = 1
 	if bossmode == 1:
 		if tanker.hp < 1:
@@ -162,9 +205,12 @@ while True:
 			tanker_bullet.render()
 			tanker_bullet.update()
 			if player.rect.colliderect(tanker_bullet.rect):
+				exec(open(f"levels/level{level}.py").read())
 				restart()
+				player.platforms = platforms
 				screen_shake = 100
 				tanker.hp = tanker.full_hp
+				blocks = 0
 		
 		for tanker_thug in tanker_thugs:
 			tanker_thug.render()
@@ -186,7 +232,7 @@ while True:
 		tankw = tanker.img.get_width() - 5
 		pygame.draw.rect(display, (255, 0, 0), (tanker.x, tanker.y-20, tankw, 20))
 		pygame.draw.rect(display, (0, 255, 100), (tanker.x, tanker.y-20, tankw * (tanker.hp / tanker.full_hp), 20))
-	
+
 	trans.set_alpha(transition)
 	display.blit(trans, (0, 0))
 	transition -= 20

@@ -13,10 +13,14 @@ spikes = [
 
 
 dialogs = [
-        Dialog(352, 512+32, [["ogre", "1: Beginnings"],
-                          ["romania_confused", "Who are you?"],
-                          ["manikom_bored", "Manikom."],
-                          ["romania_bored", "Huh, so you ended up here as well."]]),
+        #352 512+32
+        Dialog(352, 512+32, [["Israel_Angry", "You stole my land!"],
+                        ["Palestine_Angry", "You stole my land!"],
+                        ["Manikom_Confused", "Why are you fighting?"],
+                        ["Romania_Bored", "Eh, they've been doing that for who knows how long"],
+                        ["Manikom_Bored", "Isn't it worth it to work together for once?"],
+                        ["Manikom_Confused", "I mean, you probably want to get out of here."],
+                        ["Israel_Angry", "I guess so..."]], "images/dialogs/israel_angry.png", True),
 ]
 
 eol_x = 32

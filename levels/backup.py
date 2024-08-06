@@ -1,13 +1,22 @@
 platforms = [
-	pygame.Rect(0, 0, 32, 608),
-	pygame.Rect(0, 576, 960, 32),
-	pygame.Rect(928, 0, 32, 608),
-	pygame.Rect(0, 0, 928, 32),
-	pygame.Rect(416, 512, 320, 64),
+        pygame.Rect(0, 352, 256, 256),
+        pygame.Rect(800, 352, 192, 256),
+        pygame.Rect(288, 448, 32, 32),
+        pygame.Rect(480, 448, 32, 32),
+        pygame.Rect(704, 448, 32, 32),
 ]
+
 spikes = [
 ]
 
-manik_x = 832
-manik_y = 544
-manik=True
+
+dialogs = [
+]
+
+eol_x = 928
+eol_y = 288
+lavaballs = [
+        LavaBall(480, 384, 0.06),
+]
+player_x = 0
+player_y = 320

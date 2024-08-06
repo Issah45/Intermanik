@@ -1,7 +1,7 @@
 platforms = [
-        pygame.Rect(0, 0, 960, 32),
-        pygame.Rect(928, 0, 32, 608),
-        pygame.Rect(0, 576, 928, 32),
+        pygame.Rect(0, 0, 960, 32,),
+        pygame.Rect(928, 0, 32, 608,),
+        pygame.Rect(0, 576, 928, 32,),
         pygame.Rect(0, 0, 32, 576),
         pygame.Rect(160, 160, 768, 32),
         pygame.Rect(32, 320, 672, 32),
@@ -37,14 +37,10 @@ lavaballs = [
 ]
 
 dialogs = [
-        Dialog(640, 288, [["ogre", "3: The Fight"],
-                        ["Israel_Angry", "You stole my land!"],
-                        ["Palestine_Angry", "You stole my land!"],
-                        ["Manikom_Confused", "Why are you fighting?"],
-                        ["Romania_Bored", "Eh, they've been doing that for who knows how long"],
-                        ["Manikom_Bored", "Isn't it worth it to work together for once?"],
-                        ["Manikom_Confused", "I mean, you probably want to get out of here."],
-                        ["Israel_Angry", "I guess so..."]]),
+        # 640 288
+        Dialog(640, 288, [["romania_confused", "Who are you?"],
+                          ["manikom_bored", "Manikom."],
+                          ["romania_bored", "Huh, so you ended up here as well."]], "images/dialogs/romania_confused.png"),
 ]
 
 eol_x = 32
