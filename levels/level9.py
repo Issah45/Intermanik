@@ -21,8 +21,8 @@ dialogs = [
                           ["romania_confused", "who could possibly be in there?"]], "images/dialogs/romania_confused.png", True),
 ]
 
-eol_x = 928
-eol_y = 512
+eol_x = 1000
+eol_y = 1000
 lavaballs = [
 ]
 player_x = 32
