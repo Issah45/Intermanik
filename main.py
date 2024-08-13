@@ -44,4 +44,7 @@ while True:
     pygame.display.update()
     clock.tick(60)
 
-os.system("python game.py")
+try:
+    os.system("python game.py")
+except:
+    os.system("python3 game.py")

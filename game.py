@@ -28,6 +28,9 @@ max_screen_shake = 100
 blocks = 0
 block_lim = 3
 
+bgm = pygame.mixer.Sound("sounds/worldone.wav")
+bgm.play()
+
 # Tanker Init
 tanker = Tanker(592, 378)
 tanker_bullets = []
@@ -101,6 +104,8 @@ while True:
                 display.blit(bg, (0, 0))
         if level == 9:
                 display.blit(bg2, (round(width*2/3), 0))
+        if level >= 10:
+                display.blit(bg2, (0, 0))
         # Platforms
         for platform in platforms:
                 w = round(platform.width / tile_size)

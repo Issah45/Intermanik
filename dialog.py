@@ -10,6 +10,8 @@ class Dialog:
 			self.y += 5
 		self.parent = pygame.display.get_surface()
 		self.img = pygame.image.load(imger)
+		if self.img.get_height() != 28:
+			self.y = self.y - (self.img.get_height() - 28)
 		if imgerflip:
 			self.img = pygame.transform.flip(self.img, True, False)
 		self.imganim = 0
